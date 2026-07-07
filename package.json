@@ -2,9 +2,9 @@
   "name": "galaxy-flow-backend",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@10.17.0",
   "engines": {
-    "node": "22.0.0"
+    "node": "22.x"
   },
   "scripts": {
     "dev": "next dev -p 4010",
