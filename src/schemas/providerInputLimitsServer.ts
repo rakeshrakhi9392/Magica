@@ -22,8 +22,9 @@ import {
   checkResolvedResolution,
   effectiveMergeVideoInputCount,
   type ProviderLimitValidationOptions,
-  type ProviderLimitViolation,
 } from "./providerInputLimits";
+export type { ProviderLimitViolation } from "./providerInputLimits";
+import type { ProviderLimitViolation } from "./providerInputLimits";
 
 function textLength(value: unknown): number {
   return typeof value === "string" ? value.length : 0;

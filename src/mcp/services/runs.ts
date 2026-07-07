@@ -2,7 +2,6 @@ import type { RunStatus } from "@prisma/client";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { toNodeRunApi, toWorkflowRunApi } from "@/lib/mappers";
-import { graphFromUnknown } from "@/lib/graphNormalize";
 import { enqueueWorkflowRun } from "@/lib/orchestrator";
 import { validateRunClosureInputs } from "@/lib/validateRunClosure";
 import { deriveRunScope, parseWorkflowGraphForExecution } from "@/trigger/graph";
@@ -134,7 +133,7 @@ export async function getRunStatus(ownerId: string, runId: string) {
 
   const terminal = ["SUCCESS", "FAILED", "CANCELLED"].includes(run.status);
   const responseNodeRun = run.nodeRuns.find((nodeRun) => nodeRun.nodeType === "response");
-  const responseOutput = responseNodeRun?.resolvedOutput ?? responseNodeRun?.output;
+  const responseOutput = responseNodeRun?.resolvedOutput;
 
   return {
     run: toWorkflowRunApi(run),
