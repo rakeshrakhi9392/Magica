@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "next dev -p 4010",
-    "build": "pnpm generate:nodes && prisma generate && next build",
+    "build": "pnpm prisma generate && next build",
+    "build:local": "pnpm generate:nodes && pnpm prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run",

@@ -1,5 +1,5 @@
-import { writeFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { existsSync, writeFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
 import { catalogNodes } from "../nodes/catalog";
 import type { NodeCreditEstimator } from "../nodes/types";
 import * as galaxySchemas from "../schemas/index";
@@ -22,6 +22,12 @@ function resolveEstimatorExportName(fn: NodeCreditEstimator): string {
 }
 
 function generate() {
+  const outDir = dirname(OUT_PATH);
+  if (!existsSync(outDir)) {
+    console.warn(`Skipping node registry generation; output directory does not exist: ${outDir}`);
+    return;
+  }
+
   const alignmentErrors = catalogNodes.flatMap((node) => validateNodeDefinitionHandleTypes(node));
   if (alignmentErrors.length > 0) {
     console.error("Node handle dataTypes drift from Zod schemas:");
